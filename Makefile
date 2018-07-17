@@ -15,6 +15,7 @@ SRCS		= src/socket.c
 SRCS		+= src/connect.c
 SRCS		+= src/server.c
 SRCS		+= src/accept.c
+SRCS		+= src/shutdown.c
 
 TESTS_SRCS := $(SRCS)
 TESTS_SRCS += tests/socket_tests.c

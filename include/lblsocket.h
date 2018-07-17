@@ -27,8 +27,11 @@ int lsocket_create(lsocket_t *socket);
 int lsocket_destroy(lsocket_t *socket);
 
 int lsocket_server(lsocket_t *socket, uint16_t port, int backlog);
+int lsocket_accept(lsocket_t *server, lsocket_t *client);
+
 int lsocket_connect(lsocket_t *socket, const char *addr, uint16_t port);
 int lsocket_connect32(lsocket_t *socket, uint32_t ip, uint16_t port);
-int lsocket_accept(lsocket_t *server, lsocket_t *client);
+
+int lsocket_shutdown(lsocket_t *socket);
 
 #endif /* !_LBLSOCKET_H */
