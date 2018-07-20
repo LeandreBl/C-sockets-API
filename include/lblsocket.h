@@ -20,6 +20,7 @@ typedef struct lsocket_s {
 	struct sockaddr_in saddr;
 	int fd;
 	int backlog;
+	uint16_t port;
 	bool is_connected;
 } lsocket_t;
 

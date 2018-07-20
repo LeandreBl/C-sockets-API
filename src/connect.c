@@ -9,14 +9,16 @@
 
 int lsocket_connect32(lsocket_t *lsocket, uint32_t ip, uint16_t port)
 {
-	__lsocket_create(lsocket);
+	if (__lsocket_create(lsocket) == -1)
+		return (-1);
 	lsocket->saddr.sin_addr.s_addr = ip;
-	lsocket->saddr.sin_port = port;
+	lsocket->saddr.sin_port = htons(port);
 	lsocket->saddr.sin_family = AF_INET;
 	if (connect(lsocket->fd, (struct sockaddr *)&lsocket->saddr,
 		sizeof(lsocket->saddr)) == -1)
 		return (-1);
 	lsocket->is_connected = true;
+	lsocket->port = htons(lsocket->saddr.sin_port);
 	return (0);
 }
 
