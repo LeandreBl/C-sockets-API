@@ -12,6 +12,7 @@ int lsocket_server(lsocket_t *lsocket, uint16_t port, int backlog)
 	struct sockaddr *p = (struct sockaddr *)&lsocket->saddr;
 	socklen_t len = sizeof(*p);
 
+	__lsocket_create(lsocket);
 	lsocket->backlog = backlog;
 	lsocket->saddr.sin_addr.s_addr = INADDR_ANY;
 	lsocket->saddr.sin_family = AF_INET;

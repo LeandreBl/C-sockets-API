@@ -10,7 +10,7 @@
 
 #include "lblsocket.h"
 
-int lsocket_create(lsocket_t *lsocket)
+int __lsocket_create(lsocket_t *lsocket)
 {
 	memset(lsocket, 0, sizeof(*lsocket));
 	lsocket->fd = socket(AF_INET, SOCK_STREAM, 0);

@@ -9,6 +9,7 @@
 
 int lsocket_connect32(lsocket_t *lsocket, uint32_t ip, uint16_t port)
 {
+	__lsocket_create(lsocket);
 	lsocket->saddr.sin_addr.s_addr = ip;
 	lsocket->saddr.sin_port = port;
 	lsocket->saddr.sin_family = AF_INET;
