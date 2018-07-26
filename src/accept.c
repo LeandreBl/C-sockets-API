@@ -18,5 +18,6 @@ int lsocket_accept(lsocket_t *server, lsocket_t *dest)
 	if (dest->fd == -1)
 		return (-1);
 	dest->is_connected = true;
+	dest->port = server->port;
 	return (0);
 }

@@ -24,5 +24,5 @@ int lsocket_server(lsocket_t *lsocket, uint16_t port, int backlog)
 		|| listen(lsocket->fd, backlog) == -1)
 		return (-1);
 	lsocket->port = htons(lsocket->saddr.sin_port);
-	return (0);	
+	return (0);
 }
