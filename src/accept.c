@@ -7,7 +7,7 @@
 
 #include <string.h>
 
-#include "lblsocket.h"
+#include "lsocket.h"
 
 int lsocket_accept(lsocket_t *server, lsocket_t *dest)
 {

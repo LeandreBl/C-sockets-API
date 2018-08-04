@@ -5,7 +5,7 @@
 ** connect
 */
 
-#include "lblsocket.h"
+#include "lsocket.h"
 
 int lsocket_connect32(lsocket_t *lsocket, uint32_t ip, uint16_t port)
 {

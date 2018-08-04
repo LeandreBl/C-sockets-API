@@ -5,7 +5,7 @@
 ** shutdown
 */
 
-#include "lblsocket.h"
+#include "lsocket.h"
 
 int lsocket_shutdown(lsocket_t *socket)
 {

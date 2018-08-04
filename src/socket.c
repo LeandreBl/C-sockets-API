@@ -8,7 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "lblsocket.h"
+#include "lsocket.h"
 
 int __lsocket_create(lsocket_t *lsocket)
 {
