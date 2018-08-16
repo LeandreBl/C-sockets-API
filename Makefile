@@ -42,6 +42,9 @@ $(NAME): $(OBJS)
 	@echo "$(CC) $(LDFLAGS) $(OBJS) -o $@ \
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 
+static: $(OBJS)
+	@$ ar rc $(NAME:.so=.a) $(OBJS)
+
 tests_run: $(TESTS_OBJS)
 	@$ $(CC) -lcriterion $(TESTS_OBJS) -o $@
 	@echo "$(CC) -lcriterion $(TESTS_OBJS) -o $@ \
@@ -58,6 +61,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	@$(RM) $(NAME:.so=.a)
 
 re: fclean all
 
