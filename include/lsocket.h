@@ -24,7 +24,6 @@ typedef struct lsocket_s {
 	bool is_connected;
 } lsocket_t;
 
-int __lsocket_create(lsocket_t *socket);
 int lsocket_destroy(lsocket_t *socket);
 
 int lsocket_server(lsocket_t *socket, uint16_t port, int backlog);
