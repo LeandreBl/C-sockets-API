@@ -9,6 +9,8 @@ NAME		= liblsocket.so
 
 CC		= gcc
 
+ARCHIVER	= ar
+
 SRCS		= src/socket.c
 SRCS		+= src/connect.c
 SRCS		+= src/server.c
@@ -43,7 +45,7 @@ $(NAME): $(OBJS)
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 
 static: $(OBJS)
-	@$ ar rc $(NAME:.so=.a) $(OBJS)
+	@$ $(ARCHIVER) rc $(NAME:.so=.a) $(OBJS)
 
 tests_run: $(TESTS_OBJS)
 	@$ $(CC) -lcriterion $(TESTS_OBJS) -o $@
@@ -60,8 +62,7 @@ clean:
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME)
-	@$(RM) $(NAME:.so=.a)
+	$(RM) $(NAME) $(NAME:.so=.a)
 
 re: fclean all
 
@@ -71,4 +72,4 @@ install: re
 	cp include/lsocket.h /usr/include/ 2> /dev/null && \
 	printf "\033[1m\033[32mLibrary successfull installed !\033[0m\n"
 
-.PHONY: all clean fclean re tests_run debug install
+.PHONY: all clean fclean re tests_run debug install static
