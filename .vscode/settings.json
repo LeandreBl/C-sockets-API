@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "lsocket.h": "c"
+    "lsocket.h": "c",
+    "criterion.h": "c"
   }
 }
