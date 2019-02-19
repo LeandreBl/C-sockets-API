@@ -12,6 +12,7 @@ CC		= gcc
 ARCHIVER	= ar
 
 SRCS		= src/socket.c
+SRCS		+= src/netapi.c
 SRCS		+= src/connect.c
 SRCS		+= src/server.c
 SRCS		+= src/accept.c
@@ -70,6 +71,7 @@ install: re
 	@cp $(NAME) /usr/lib/$(NAME) 2> /dev/null || \
 	printf "\033[1m\033[31mError : try sudo make install\033[0m\n" && \
 	cp include/lsocket.h /usr/include/ 2> /dev/null && \
+	cp include/netapi.h /usr/include/ 2> /dev/null && \
 	printf "\033[1m\033[32mLibrary successfull installed !\033[0m\n"
 
 .PHONY: all clean fclean re tests_run debug install static
