@@ -12,6 +12,10 @@ CC		= gcc
 ARCHIVER	= ar
 
 SRCS		= src/socket.c
+SRCS		+= src/netapi_ip_addr.c
+SRCS		+= src/netapi_is_connected.c
+SRCS		+= src/netapi_first_connected.c
+SRCS		+= src/netapi_print.c
 SRCS		+= src/netapi.c
 SRCS		+= src/connect.c
 SRCS		+= src/server.c

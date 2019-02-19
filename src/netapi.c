@@ -13,6 +13,7 @@ static void set_mac(netapi_t *netapi, const struct ifaddrs *node)
   struct sockaddr_ll *p = (struct sockaddr_ll *)node->ifa_addr;
 
   lvector_reserve(netapi->mac, p->sll_halen);
+  netapi->mac.len = p->sll_halen;
   memcpy(netapi->mac.arr, p->sll_addr, p->sll_halen * sizeof(uint8_t));
 }
 
@@ -23,7 +24,7 @@ static void set_ipaddr(netapi_t *netapi, const struct ifaddrs *node)
   netapi->ip_addr = soin->sin_addr.s_addr;
 }
 
-static netapi_t *netapi_create(const struct ifaddrs *node)
+netapi_t *netapi_create(const struct ifaddrs *node)
 {
   netapi_t *obj = calloc(1, sizeof(*obj));
 
@@ -38,7 +39,7 @@ static netapi_t *netapi_create(const struct ifaddrs *node)
   return (obj);
 }
 
-static void netapi_destroy(netapi_t *interface)
+void netapi_destroy(netapi_t *interface)
 {
   lstr_destroy(&interface->id);
   lvector_destroy(interface->mac);
@@ -86,3 +87,4 @@ int netapi(gtab_t *tab)
   return (0);
 }
 
+bool is_connected(uint32_t ipaddr) __THROW;
