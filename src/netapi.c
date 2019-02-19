@@ -43,6 +43,7 @@ void netapi_destroy(netapi_t *interface)
 {
   lstr_destroy(&interface->id);
   lvector_destroy(interface->mac);
+  free(interface);
 }
 
 static int add_interface(gtab_t *tab, struct ifaddrs *node)
