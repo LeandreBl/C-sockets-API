@@ -3,16 +3,15 @@
 
 # include <stdint.h>
 # include <stdbool.h>
-# include <arpa/inet.h>
-# include <linux/ip.h>
+# include <lvector.h>
 
-# include "lgtab.h"
+# include <lgtab.h>
+# include <lstr.h>
 
 typedef struct netapi_s {
-  char *id;
+  lstr_t id;
   uint32_t ip_addr;
-  uint8_t maclen;
-  uint8_t mac_addr[8];
+  lvector(uint8_t) mac;
 } netapi_t;
 
 int netapi(gtab_t *tab) __THROW __nonnull((1));

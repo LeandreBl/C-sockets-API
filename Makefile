@@ -26,6 +26,9 @@ TESTS_OBJS	= $(TESTS_SRCS:.c=.o)
 
 RM		= rm -f
 
+LIBS		+= -llstr
+LIBS		+= -llgtab
+
 CFLAGS		= -Werror -Wall -Wextra -fPIC -pedantic
 CFLAGS		+= -I ./include
 LDFLAGS		= -shared
@@ -41,8 +44,8 @@ NO_COLOR	= '\033[0m'
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$ $(CC) $(LDFLAGS) $(OBJS) -o $@
-	@echo "$(CC) $(LDFLAGS) $(OBJS) -o $@ \
+	@$ $(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $@
+	@echo "$(CC) $(LDFLAGS) $(OBJS) $(LIBS) -o $@ \
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 
 static: $(OBJS)

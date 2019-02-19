@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <ifaddrs.h>
 #include <linux/if_packet.h>
+#include <arpa/inet.h>
 
 #include "netapi.h"
 
@@ -11,8 +12,8 @@ static void set_mac(netapi_t *netapi, const struct ifaddrs *node)
 {
   struct sockaddr_ll *p = (struct sockaddr_ll *)node->ifa_addr;
 
-  netapi->maclen = p->sll_halen;
-  memcpy(netapi->mac_addr, p->sll_addr, p->sll_halen * sizeof(uint8_t));
+  lvector_reserve(netapi->mac, p->sll_halen);
+  memcpy(netapi->mac.arr, p->sll_addr, p->sll_halen * sizeof(uint8_t));
 }
 
 static void set_ipaddr(netapi_t *netapi, const struct ifaddrs *node)
@@ -28,11 +29,8 @@ static netapi_t *netapi_create(const struct ifaddrs *node)
 
   if (obj == NULL)
     return (NULL);
-  obj->id = strdup(node->ifa_name);
-  if (obj->id == NULL) {
-    free(obj);
+  if (lstr_create(&obj->id, node->ifa_name) == -1)
     return (NULL);
-  }
   if (node->ifa_addr->sa_family == AF_INET)
     set_ipaddr(obj, node);
   else if (node->ifa_addr->sa_family == AF_PACKET)
@@ -40,10 +38,10 @@ static netapi_t *netapi_create(const struct ifaddrs *node)
   return (obj);
 }
 
-static void inet_destroy(netapi_t *interface)
+static void netapi_destroy(netapi_t *interface)
 {
-  free(interface->id);
-  free(interface);
+  lstr_destroy(&interface->id);
+  lvector_destroy(interface->mac);
 }
 
 static int add_interface(gtab_t *tab, struct ifaddrs *node)
@@ -53,7 +51,7 @@ static int add_interface(gtab_t *tab, struct ifaddrs *node)
 
   for (size_t i = 0; i < tab->len; ++i) {
     p = tab->i[i];
-    if (strcmp(p->id, node->ifa_name) == 0) {
+    if (strcmp(p->id.i, node->ifa_name) == 0) {
       if (node->ifa_addr->sa_family == AF_PACKET)
         set_mac(p, node);
       else if (node->ifa_addr->sa_family == AF_INET)
@@ -73,7 +71,7 @@ int netapi(gtab_t *tab)
   struct ifaddrs *node;
   struct sockaddr_in *saddr;
 
-  if (gtab_create(tab, 3, (void (*)(void *))inet_destroy) == -1 || getifaddrs(&list) == -1) {
+  if (gtab_create(tab, 3, (void (*)(void *))netapi_destroy) == -1 || getifaddrs(&list) == -1) {
     fprintf(stderr, "Error: netapi: %s\n", strerror(errno));
     return (-1);
   }
