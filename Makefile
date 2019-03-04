@@ -56,8 +56,8 @@ static: $(OBJS)
 	@$ $(ARCHIVER) rc $(NAME:.so=.a) $(OBJS)
 
 tests_run: $(TESTS_OBJS)
-	@$ $(CC) -lcriterion $(TESTS_OBJS) -o $@
-	@echo "$(CC) -lcriterion $(TESTS_OBJS) -o $@ \
+	@$ $(CC) -lcriterion $(TESTS_OBJS) $(LIBS)  -o $@
+	@echo "$(CC) -lcriterion $(TESTS_OBJS) $(LIBS)  -o $@ \
 	["$(GREEN)"LINKING OK"$(NO_COLOR)"]"
 	./$@
 	@$(RM) $@

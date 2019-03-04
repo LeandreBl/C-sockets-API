@@ -10,11 +10,11 @@
 
 static void set_mac(netapi_t *netapi, const struct ifaddrs *node)
 {
-  struct sockaddr_ll *p = (struct sockaddr_ll *)node->ifa_addr;
+  struct sockaddr_ll *ptr = (struct sockaddr_ll *)node->ifa_addr;
 
-  lvector_reserve(netapi->mac, p->sll_halen);
-  netapi->mac.len = p->sll_halen;
-  memcpy(netapi->mac.arr, p->sll_addr, p->sll_halen * sizeof(uint8_t));
+  lvector_reserve(netapi->mac, ptr->sll_halen);
+  netapi->mac.len = ptr->sll_halen;
+  memcpy(netapi->mac.arr, ptr->sll_addr, ptr->sll_halen * sizeof(uint8_t));
 }
 
 static void set_ipaddr(netapi_t *netapi, const struct ifaddrs *node)
