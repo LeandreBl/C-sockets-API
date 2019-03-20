@@ -10,7 +10,7 @@
 
 #include "lsocket.h"
 
-int __lsocket_create(lsocket_t *lsocket)
+__attribute__ ((visibility ("hidden"))) int lsocket_create(lsocket_t *lsocket)
 {
   memset(lsocket, 0, sizeof(*lsocket));
   lsocket->fd = socket(AF_INET, SOCK_STREAM, 0);

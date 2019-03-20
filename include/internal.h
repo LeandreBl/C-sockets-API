@@ -3,6 +3,6 @@
 
 # include "lsocket.h"
 
-int __lsocket_create(lsocket_t *socket) __THROW __nonnull((1));
+__attribute__ ((visibility ("hidden"))) int lsocket_create(lsocket_t *socket) __THROW __nonnull((1));
 
 #endif /* !INTERNAL_H_ */

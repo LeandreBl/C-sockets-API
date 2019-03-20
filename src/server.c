@@ -12,7 +12,7 @@ int lsocket_server(lsocket_t *lsocket, uint16_t port, int backlog)
   struct sockaddr *p = (struct sockaddr *)&lsocket->saddr;
   socklen_t len = sizeof(*p);
 
-  if (__lsocket_create(lsocket) == -1)
+  if (lsocket_create(lsocket) == -1)
     return (-1);
   lsocket->backlog = backlog;
   lsocket->saddr.sin_addr.s_addr = INADDR_ANY;

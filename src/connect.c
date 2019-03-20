@@ -9,7 +9,7 @@
 
 int lsocket_connect32(lsocket_t *lsocket, uint32_t ip, uint16_t port)
 {
-  if (__lsocket_create(lsocket) == -1)
+  if (lsocket_create(lsocket) == -1)
     return (-1);
   lsocket->saddr.sin_addr.s_addr = ip;
   lsocket->saddr.sin_port = htons(port);
