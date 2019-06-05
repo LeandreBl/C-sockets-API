@@ -10,6 +10,7 @@ void netapi_print(const netapi_t *iface)
           " -ip:\t%u.%u.%u.%u\n"
           " -mac:\t",
           iface->id.i, ip[0], ip[1], ip[2], ip[3]);
-  for (size_t i = 0; i < iface->mac.len; ++i)
-    fprintf(stderr, "%02X%s", iface->mac.arr[i], (i + 1 != iface->mac.len) ? ":" : "\n");
+  lvector_for(i, iface->mac) {
+    fprintf(stderr, "%02X%s", iface->mac.arr[i], (i + 1 < iface->mac.len) ? ":" : "\n");
+  }
 }
