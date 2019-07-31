@@ -1,17 +1,17 @@
 #ifndef _NET_API_H_
-# define _NET_API_H_
+#define _NET_API_H_
 
-# include <stdint.h>
-# include <stdbool.h>
-# include <lvector.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <lvector.h>
 
-# include <lgtab.h>
-# include <lstr.h>
+#include <lgtab.h>
+#include <lstr.h>
 
 typedef struct netapi_s {
-  lstr_t id;
-  uint32_t ip_addr;
-  lvector(uint8_t) mac;
+	lstr_t id;
+	uint32_t ip_addr;
+	lvector(uint8_t) mac;
 } netapi_t;
 
 int netapi(gtab_t *tab) __THROW __nonnull((1));

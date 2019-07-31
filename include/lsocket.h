@@ -6,16 +6,16 @@
 */
 
 #ifndef _LBLSOCKET_H
-# define _LBLSOCKET_H
+#define _LBLSOCKET_H
 
-# include <sys/types.h>
-# include <sys/socket.h>
-# include <arpa/inet.h>
-# include <netdb.h>
-# include <stddef.h>
-# include <stdint.h>
-# include <stdbool.h>
-# include <sys/cdefs.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdbool.h>
+#include <sys/cdefs.h>
 
 typedef struct lsocket_s {
 	struct sockaddr_in saddr;
